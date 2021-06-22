@@ -1,7 +1,4 @@
 #!/bin/bash
-item="$1"
-itemname=${item##*/}
-path=`find / -iname "$itemname" 2>/dev/null`
 getEmail(){ 
         local IFS=' ' 
         oldemail1=( ${oldcsv[2]} )
@@ -42,4 +39,4 @@ while read -ra oldcsv; do
         echo "$Id,$Location_Id,${NewName[@]},$Title_,$NewEmail,$Department_" >> accounts_new.csv 
         unset NewName
     fi
-done <${path}
+done <$1
