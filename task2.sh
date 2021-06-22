@@ -1,7 +1,4 @@
 #!/bin/bash
-item="$1"
-itemname=${item##*/}
-path=`find / -iname "$itemname" 2>/dev/null`
 a="["
 b="-"
 c="n" #for string "not ok"
@@ -49,8 +46,8 @@ count=`echo ${output_txt[*]} | gawk 'BEGIN{FS=","}{print NF}'` # count fields of
             continue
         fi
     fi
-done <${path}
-lastLine=`tail -1 ${path}`
+done <$1
+lastLine=`tail -1 $1`
 success=${lastLine:0:1}
 failed=`echo $lastLine | gawk -F, '{print $2}' | cut -b 2`
 rating=`echo $lastLine | gawk -F, '{print $3}' | gawk '{print $NF}' | sed 's/%$//'`
