@@ -1,12 +1,8 @@
-param (
-    $Pathto=$args[0]
-)
-$outcsv="C:\scripts\acc\accounts_new.csv"
-$data=@(Get-Content -Path $Pathto)
+$data=@(Get-Content $args[0])
 $addPart="@abc.com"
 foreach ($item in $data) {
     if (($item.Split(",") | Select-Object -Index 0) -eq "id") { # for header
-        $item >> $outcsv
+        $item >> accounts_new.csv
     }
     else {   
         $id=$item.Split(",") | Select-Object -Index 0
@@ -39,6 +35,6 @@ foreach ($item in $data) {
                 $email=-join($firstLetter,$surname,$location_id,$addPart)
             }
         }
-    ($id,$location_id,$name,$title,$email,$department) -join "," >> $outcsv
+    ($id,$location_id,$name,$title,$email,$department) -join "," >> accounts_new.csv
     }
 }
